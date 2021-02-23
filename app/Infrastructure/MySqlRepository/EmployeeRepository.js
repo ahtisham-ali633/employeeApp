@@ -15,6 +15,24 @@ class EmployeeRepository {
             return employees.map(employee => EmployeeEntity.createFromObject(employee));
         }
     }
+
+    async updateEmployee(employee) {
+        const isEmployeeExists = await Employee.findOne({
+            where: {
+                employeeId: employee.employeeId
+            }
+        })
+
+        if(!isEmployeeExists) {
+            return false
+        }
+
+        return await Employee.update(employee, {
+            where: {
+                employeeId: employee.employeeId
+            }
+        })
+    }
 }
 
 module.exports = EmployeeRepository;
