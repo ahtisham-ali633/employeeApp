@@ -1,8 +1,9 @@
 const db = require('../Database/Models');
 const {Employee} = db;
 const EmployeeEntity = require("../../Domain/Entites/EmployeeEntity");
+const BaseEmployee = require("../../Domain/Employee/BaseEmployee");
 
-class EmployeeRepository {
+class EmployeeRepository extends BaseEmployee{
     async createEmployee(employee) {
         return Employee.create(employee);
 
@@ -12,14 +13,14 @@ class EmployeeRepository {
         const employees = await Employee.findAll();
 
         if(employees.length > 0) {
-            return employees.map(employee => EmployeeEntity.createFromObject(employee));
+            return employees.map(employee => EmployeeEntity.create(employee, employee))
         }
     }
 
-    async updateEmployee(employee) {
+    async updateEmployee(employee, employeeId) {
         const isEmployeeExists = await Employee.findOne({
             where: {
-                employeeId: employee.employeeId
+                employeeId: employeeId
             }
         })
 
@@ -29,7 +30,7 @@ class EmployeeRepository {
 
         return await Employee.update(employee, {
             where: {
-                employeeId: employee.employeeId
+                employeeId: employeeId
             }
         })
     }
