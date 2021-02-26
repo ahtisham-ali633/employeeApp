@@ -13,8 +13,7 @@ class GetEmployee {
             return HttpResp.create(HttpStatusCode.OK, employee);
         } catch (e) {
             const body = { status: 'error', message: e.message};
-            return body;
-        }
+            return HttpResp.create(HttpStatusCode.ERROR, body);        }
     }
 }
 

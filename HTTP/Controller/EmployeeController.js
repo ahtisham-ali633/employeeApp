@@ -24,8 +24,9 @@ class EmployeeController {
 
     async updateEmployee(req, res) {
         const {body} = req;
+        const employeeId = req.params.employeeId;
         const updateEmployeeDTO = new UpdateEmployeeDTO(body);
-        const httpResponse = await this.updateEmployees.updateEmployee(updateEmployeeDTO.employee);
+        const httpResponse = await this.updateEmployees.updateEmployee(updateEmployeeDTO, employeeId);
         HttpResp.convertToExpress(res, httpResponse);
     }
 }

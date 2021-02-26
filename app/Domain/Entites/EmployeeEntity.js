@@ -1,7 +1,8 @@
 const uuid = require('uuid');
 
 class EmployeeEntity {
-    constructor(employeeId, firstName, lastName, email, dob, gender, address, city, phone) {
+    constructor({employeeId, firstName, lastName, email, dob, gender, address, city, phone}) {
+        console.log(arguments)
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -11,18 +12,20 @@ class EmployeeEntity {
         this.address = address;
         this.city = city;
         this.phone = phone;
+
+        // this.props = props
     }
 
-    static createFromDetails(employeeId, firstName, lastName, email, dob, gender, address, city, phone) {
-        return new EmployeeEntity(employeeId, firstName, lastName, email, dob, gender, address, city, phone);
-    }
+    // get firstName() {
+    //     return this.props.firstName
+    // }
 
-    static createFromObject(obj) {
-        return new EmployeeEntity(obj.employeeId, obj.firstName, obj.lastName, obj.email, obj.dob, obj.gender, obj.address, obj.city, obj.phone);
-    }
+    static create(props, employeeId) {
+        if(!employeeId) {
+            employeeId = uuid.v4();
+        }
 
-    static createNewId() {
-        return uuid.v4();
+        return new EmployeeEntity({employeeId, ...props})
     }
 
 }

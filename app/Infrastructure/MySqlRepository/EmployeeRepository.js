@@ -10,10 +10,10 @@ class EmployeeRepository extends BaseEmployee{
     }
 
     async fetchAllEmployees() {
-        const employees = await Employee.findAll();
+        const employees = await Employee.findAll({});
 
         if(employees.length > 0) {
-            return employees.map(employee => EmployeeEntity.create(employee, employee))
+            return employees.map(employee => EmployeeEntity.create(employee.dataValues, employee.employeeId))
         }
     }
 
