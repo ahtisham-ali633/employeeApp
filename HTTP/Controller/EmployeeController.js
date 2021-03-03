@@ -13,7 +13,7 @@ class EmployeeController {
     async createEmployee(req, res) {
         const {body} = req;
         const addEmployeeDTO = new AddEmployeeDTO(body)
-        const httpResponse = await this.saveEmployee.createEmployee(addEmployeeDTO.employee);
+        const httpResponse = await this.saveEmployee.createEmployee(addEmployeeDTO);
         HttpResp.convertToExpress(res, httpResponse);
     }
 

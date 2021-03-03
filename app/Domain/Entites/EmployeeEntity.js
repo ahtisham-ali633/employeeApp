@@ -2,7 +2,6 @@ const uuid = require('uuid');
 
 class EmployeeEntity {
     constructor({employeeId, firstName, lastName, email, dob, gender, address, city, phone}) {
-        console.log(arguments)
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;

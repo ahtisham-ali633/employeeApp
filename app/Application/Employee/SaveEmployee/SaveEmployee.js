@@ -11,8 +11,9 @@ class SaveEmployee {
     }
 
     async createEmployee(addEmployeeDTO) {
+        console.log(addEmployeeDTO.employee)
         try {
-            const employee = await this.employeeRepository.createEmployee(addEmployeeDTO);
+            const employee = await this.employeeRepository.createEmployee(addEmployeeDTO.getEmployee());
             return HttpResp.create(HttpStatusCode.OK, employee);
         } catch (e) {
             const body = { status: 'error', message: e.message};
